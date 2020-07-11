@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+    <style>
+        body{background-color: black;}
+        h1{color:rgb(241, 236, 238); }
+.main{text-align: center;}
+.circle{height: 200px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 3px;
+    font-size: 2rem;
+    margin: 0px auto;
+    border-radius: 50%;
+    background: rgb(245, 221, 6);
+    margin-bottom: 20px;
+    color: white;}
+  li{color: white;background-color: rgb(85, 112, 199);list-style: none;font-size: 20px;}
+  .btn{background-color: rgb(84, 7, 172); color: white;outline: none;}
+   
+   #lap_list{margin-top: 10px;margin-bottom: 10px;} </style>
+</head>
+
+<body>
+    <div class="container main">
+        <H1>Stop Watch</H1>
+        <div class="circle"><h4><span id="min">00</span>:<span id="sec">00</span>:<span id="msec">00</span></h4></div>
+        <button class="btn" onclick="Start_btn()">
+            Start
+        </button>
+        <button class="btn" onclick="Stop_btn()">
+            Stop
+        </button>
+        <button class="btn" onclick="Reset_btn()">
+            Reset
+        </button>
+        <button  class="btn" onclick="lap_btn()">
+            Lap
+        </button>
+        <div id="lap_list">
+            <ul>
+
+            </ul>
+        </div>
+        <button  class="btn" onclick="clb()">
+            Blue
+        </button>
+        <button  class="btn" onclick="clg()">
+            Green
+        </button>
+        <button  class="btn" onclick="clgy()">
+            Grey
+        </button>
+        <button  class="btn" onclick="clp()">
+            Purple
+        </button>
+        <button  class="btn" onclick="cly()">
+            Yellow
+        </button>
+        <footer style="color: white;"><h3>Muhammad hammad uddin</h3></footer>
+    </div>
+
+
+
+
+
+    <script>
+        var minsp = document.getElementById("min");
+        var secsp = document.getElementById("sec");
+        var msecsp = document.getElementById("msec");
+        var msec = 0;
+        var sec = 0;
+        var min = 0;
+        var interval;
+        var laplist = document.getElementById('lap_list');
+        var id= 0;
+
+
+        function timer() {
+            msec++
+            msecsp.innerHTML = msec
+            if (msec >= 100) {
+                sec++
+                secsp.innerHTML = sec
+                msec = 0
+            } else if (sec >= 60) {
+                min++
+                minsp.innerHTML = min
+                sec = 0
+            }
+        }
+
+
+
+        Start_btn = () => {
+            if (!interval) {
+                interval = setInterval(timer, 100)
+            }
+        }
+
+
+
+        Stop_btn = () => {
+            clearInterval(interval)
+            interval = false
+        }
+        Reset_btn = () => {
+            minsp.innerHTML = '00';
+            secsp.innerHTML = '00';
+            msecsp.innerHTML = '00';
+            Stop_btn();
+            id =0;
+            laplist.innerHTML="<ul></ul>";
+        }
+
+
+
+
+        function lap_btn() {
+            
+            id++;
+            var lap ="lap "+id+" : "+ min + " : " + sec + " : " + msec;
+            var node = document.createElement("li");
+            var textnode = document.createTextNode(lap);
+            node.appendChild(textnode);
+            document.getElementById("lap_list").appendChild(node);
+
+        }
+              
+        function cly(){
+            document.body.style.backgroundColor = "#ffee00";
+        }
+        function clg(){
+            document.body.style.backgroundColor = "#36d805";
+        }
+        function clp(){
+            document.body.style.backgroundColor = "#9a36eb";
+        }
+        function clgy(){
+            document.body.style.backgroundColor = "#757974";
+        }
+        
+        function clb(){
+            document.body.style.backgroundColor = "#00bbff";
+        }
+    </script>
+
+
+
+</body>
+
+</html>
